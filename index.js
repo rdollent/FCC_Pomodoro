@@ -16,11 +16,47 @@ function runThis() {
   const btnStart = document.getElementsByClassName("start");
   const btnStop = document.getElementsByClassName("stop");
   const btnReset = document.getElementsByClassName("reset");
+  const plus = document.getElementsByClassName("plus");
+  const minus = document.getElementsByClassName("minus");
 
   //add events
   btnStart[0].addEventListener("click", startTime);
   btnStop[0].addEventListener("click", stopTime);
   btnReset[0].addEventListener("click", resetTime);
+  plus[0].addEventListener("mousedown", addTime);
+  minus[0].addEventListener("mousedown", subtractTime);
+  plus[1].addEventListener("mousedown", addTime);
+  minus[1].addEventListener("mousedown", subtractTime);
+
+  function addTime() {
+    switch(this.previousElementSibling.id) {
+      case "pomodoro":
+        pom.innerText++;
+        pomBase = pom.innerText * 60;
+        break;
+      case "break":
+        brk.innerText++;
+        breakBase = brk.innerText * 60;
+        break;
+    }
+  }
+    
+  function subtractTime() {
+    switch(this.nextElementSibling.id) {
+      case "pomodoro":
+        if(pom.innerText > 1) {
+          pom.innerText--;
+          pomBase = pom.innerText * 60;
+        }
+        break;
+      case "break":
+        if(brk.innerText > 1) {
+          brk.innerText--;
+          breakBase = brk.innerText * 60;
+        }
+        break;
+    }
+  }
 
   //pomodoro time
   let pomNow = pomBase + 1;  //+1 to display beginning time
@@ -56,7 +92,7 @@ function runThis() {
     spanMin[0].innerText =
       (pomMin > 0 ? 
         (pomMin >= 10 ? pomMin : `0${pomMin}`)
-      : "00:");
+      : "00");
 
     spanSec[0].innerText =
       (pomSec > 0 ? 
@@ -83,14 +119,24 @@ function runThis() {
           pomNow = pomBase;
           pomSec = pomNow % 60;
           pomMin = Math.round((pomNow/60) - (pomSec/60));
-          spanMin[0].innerText = pomMin;
+          if(pom.innerText.length === 1) {
+            spanMin[0].innerText = `0${pomMin}`;
+          }
+          else {  
+            spanMin[0].innerText = pomMin;
+          }
           spanSec[0].innerText = `0${pomSec}`;
           break;
         case "break":
           breakNow = breakBase;
           breakSec = breakNow % 60;
           breakMin = Math.round((breakNow/60) - (breakSec/60));
-          spanMin[0].innerText = breakMin;
+          if(brk.innerText.length === 1) {
+            spanMin[0].innerText = `0${breakMin}`;
+          }
+          else {
+            spanMin[0].innerText = breakMin;
+          }
           spanSec[0].innerText = `0${breakSec}`;  
           break;
       }
@@ -105,7 +151,7 @@ function runThis() {
     spanMin[0].innerText =
       (breakMin > 0 ? 
         (breakMin >= 10 ? breakMin : `0${breakMin}`)
-      : "00:");
+      : "00");
 
     spanSec[0].innerText =
       (breakSec > 0 ? 
