@@ -27,9 +27,18 @@ function runThis() {
   minus[0].addEventListener("mousedown", subtractTime);
   plus[1].addEventListener("mousedown", addTime);
   minus[1].addEventListener("mousedown", subtractTime);
+  
+  const buttons = [plus[0], minus[0], plus[1], minus[1]];
+  const events = ["mouseup", "mousedown"];
+  buttons.forEach(function(b) {
+    events.forEach(function(e) {
+      b.addEventListener(e, holdThis);
+    });
+  });
 
-  function addTime() {
-    switch(this.previousElementSibling.id) {
+  function addTime(elem) {
+    let x = (this.innerText === "+" ? this : elem);
+    switch(x.previousElementSibling.id) {
       case "pomodoro":
         pom.innerText++;
         pomBase = pom.innerText * 60;
@@ -41,8 +50,9 @@ function runThis() {
     }
   }
     
-  function subtractTime() {
-    switch(this.nextElementSibling.id) {
+  function subtractTime(elem) {
+    let x = (this.innerText === "-" ? this : elem);
+    switch(x.nextElementSibling.id) {
       case "pomodoro":
         if(pom.innerText > 1) {
           pom.innerText--;
@@ -165,8 +175,32 @@ function runThis() {
       startTime();
     }
   }
+  
+  let intervalID = null;
+  function holdThis(e) {
+    if(e.type === "mousedown") {
+      (this.innerText ==="+" ? holdAdd(this) : holdSubtract(this));
+    }
+    if(e.type === "mouseup") {
+      letGo();
+    }
+    
+    function holdAdd(elem) {
+      intervalID = setInterval(function() {
+        return addTime(elem);
+        }, 300);
+    }
+    
+    function holdSubtract(elem) {
+      intervalID = setInterval(function() {
+        return subtractTime(elem);
+        }, 300);
+    }
+
+    function letGo() {
+      clearInterval(intervalID);
+      intervalID = null;
+    }
+  }
+  
 }
-
-
-
-
