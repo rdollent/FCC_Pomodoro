@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
   <script style="text/javascript" src="index.js"></script>
   <meta name="description" content="Freecodecamp Pomodoro Clock">
@@ -10,12 +11,22 @@
 </head>
 
 <body>
-  <div class="time"><span class="min"></span>:<span class="sec"></span></div>
-  <button name="start" class="start">start</button>
-  <button name="stop" class="stop">stop</button>
-  <button name="reset" class="reset">reset</button>
-  <div><span>Pomodoro Length </span><a class="minus">-</a><span id="pomodoro">25</span><a class="plus">+</a></div>
-  <div><span>Break Length </span><a class="minus">-</a><span id="break">5</span><a class="plus">+</a></div>
+  <div class="time">
+    <div class="contain">
+      <span class="min"></span><span class="colon">:</span><span class="sec"></span>
+      </div>
+    </div>
+  <div class="btns">
+    <button name="start" class="start buttons">START</button>
+    <button name="stop" class="stop buttons">STOP</button>
+    <button name="reset" class="reset buttons">RESET</button>
+  </div>
+  <div class="lengths">
+    <div class="pom block">
+    <span>Pomodoro Length</span><button class="minus">-</button><span id="pomodoro">25</span><button class="plus">+</button></div>
+  <div class ="brk block">
+    <span>Break Length</span><button class="minus">-</button><span id="break">5</span><button class="plus">+</button></div>
+  </div>
   
 </body>
 
