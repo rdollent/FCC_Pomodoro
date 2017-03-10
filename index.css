@@ -52,15 +52,78 @@ table {
 /*End CSS reset*/
 
 * {
-  border: 1px solid white !important; /*to display borders of elements, helps with CSS position and resize*/
+  /*border: 1px solid black !important; /*to display borders of elements, helps with CSS position and resize*/
   box-sizing:border-box;
+  font-family: 'Special Elite';
+}
+
+body {
+  background-color: #def29c;
+}
+.time {
+  font-size: 6em;
+  padding-top: 100px;
+}
+
+.contain {
+  margin: 0 auto;
+  width: 280px;
+
+}
+
+.min, .sec {
+  display:inline-block;
+  width:120px;
+  text-align: center;
+}
+
+span {
+  user-select: none;
+  cursor: default;
+}
+
+button {
+  border: none;
+  background: none;
+  outline: 0;
+  cursor: pointer;
+  font-size: 130%;
+}
+
+.btns {
+  text-align: center;
+  margin: 5px;
 }
 
 
+.buttons {
+  margin: 0 5px 0 5px;
+  font-size: 1.5em;
+}
+
+.block {
+  display: inline-block;
+  margin: 10px;
+}
+
+.lengths {
+  text-align: center;
+  margin: 5px;
+}
 
 /*mobile site*/
-@media only screen and (max-width:700px) {
+@media only screen and (max-width:768px) {
   body {
     width:100%;
+  }
+  .lengths {
+    padding: 5px;
+    font-size: 130%;
+  }
+  .plus, .minus {
+    font-size: 130%;
+  }
+  * {
+    padding: 10px;
   }
 }
