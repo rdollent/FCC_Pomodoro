@@ -35,17 +35,24 @@ function runThis() {
       b.addEventListener(e, holdThis);
     });
   });
+  
+  spanMin[0].innerText = pom.innerText;
+  spanSec[0].innerText = '00';
 
   function addTime(elem) {
     let x = (this.innerText === "+" ? this : elem);
     switch(x.previousElementSibling.id) {
       case "pomodoro":
+        if(pom.innerText < 60) {
         pom.innerText++;
         pomBase = pom.innerText * 60;
+        }
         break;
       case "break":
+        if(brk.innerText < 60) {
         brk.innerText++;
         breakBase = brk.innerText * 60;
+        }
         break;
     }
   }
@@ -123,7 +130,7 @@ function runThis() {
   }
 
   function resetTime() {
-    if(counter === 0) {
+    if(counter === 0 || (spanMin.length === 0 && spanSec.length === 0)) {
       switch (status) {
         case "pomodoro":      
           pomNow = pomBase;
